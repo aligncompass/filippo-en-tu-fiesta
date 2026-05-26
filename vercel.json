@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        { "type": "host", "value": "filippo-en-tu-fiesta.aligncompass.com" }
+      ],
+      "destination": "https://filippo.aligncompass.com/:path*",
+      "permanent": true
+    }
+  ]
+}
