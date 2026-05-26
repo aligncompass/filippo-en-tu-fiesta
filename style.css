@@ -1,4 +1,4 @@
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 .font-serif { font-family: 'Playfair Display', Georgia, serif; }
-::selection { background: #92622a; color: #fbf7f1; }
+::selection { background: #FFCB1F; color: #1F2A2E; }
