@@ -50,46 +50,45 @@
 </head>
 <body class="bg-cream text-charcoal font-sans antialiased">
 
-  <!-- Sticky top navigation -->
-  <header class="sticky top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-cream-deep">
+  <!-- Sticky top navigation (auto-hides on scroll down, reappears on scroll up) -->
+  <header id="site-header" class="sticky top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-cream-deep transition-transform duration-300 ease-in-out will-change-transform">
     <nav class="max-w-6xl mx-auto px-5 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <!-- Left: logo -->
       <a href="#hero" class="flex items-center shrink-0">
         <img src="assets/logo.png"
              alt="Filippo en tu Fiesta — el carrito venezolano de perros calientes"
-             class="h-20 sm:h-24 md:h-28 w-auto" />
+             class="h-24 sm:h-28 md:h-32 w-auto" />
       </a>
+      <!-- Center on mobile: hamburger -->
+      <button id="menu-toggle"
+              type="button"
+              class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-full text-charcoal hover:bg-cream-deep transition"
+              aria-label="Abrir menú"
+              aria-controls="mobile-menu"
+              aria-expanded="false">
+        <svg id="menu-icon-open" class="w-7 h-7" fill="none" stroke-linecap="round" stroke-width="2.8" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16"  stroke="#D9B97E" />
+          <path d="M4 12h16" stroke="#A8392A" />
+          <path d="M4 17h16" stroke="#D9B97E" />
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6" />
+        </svg>
+      </button>
+      <!-- Center on desktop: nav links -->
       <div class="hidden md:flex items-center gap-7 text-sm text-charcoal font-medium">
         <a href="#historia" class="hover:text-terracotta transition">Historia</a>
         <a href="#experiencia" class="hover:text-terracotta transition">Experiencia</a>
         <a href="#inversion" class="hover:text-terracotta transition">Inversión</a>
         <a href="#reserva" class="hover:text-terracotta transition">Reserva</a>
       </div>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <a href="https://wa.me/13057838032?text=Hola%2C%20quiero%20reservar%20Filippo%20para%20mi%20evento."
-           class="inline-flex items-center px-3.5 sm:px-5 py-2.5 rounded-full bg-mustard text-charcoal text-sm font-semibold hover:bg-mustard-dark transition shadow-sm whitespace-nowrap">
-          <span>Reservar</span>
-          <span class="hidden sm:inline mx-2 text-charcoal/40">·</span>
-          <span lang="en" class="hidden sm:inline text-xs font-medium text-charcoal/70">Book Now</span>
-        </a>
-        <button id="menu-toggle"
-                type="button"
-                class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-full text-charcoal hover:bg-cream-deep transition"
-                aria-label="Abrir menú"
-                aria-controls="mobile-menu"
-                aria-expanded="false">
-          <svg id="menu-icon-open" class="w-7 h-7" fill="none" stroke-linecap="round" stroke-width="2.8" viewBox="0 0 24 24" aria-hidden="true">
-            <!-- top bun -->
-            <path d="M4 7h16"  stroke="#D9B97E" />
-            <!-- sausage -->
-            <path d="M4 12h16" stroke="#A8392A" />
-            <!-- bottom bun -->
-            <path d="M4 17h16" stroke="#D9B97E" />
-          </svg>
-          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M6 18L18 6" />
-          </svg>
-        </button>
-      </div>
+      <!-- Right: Reservar CTA -->
+      <a href="https://wa.me/13057838032?text=Hola%2C%20quiero%20reservar%20Filippo%20para%20mi%20evento."
+         class="inline-flex items-center px-3.5 sm:px-5 py-2.5 rounded-full bg-mustard text-charcoal text-sm font-semibold hover:bg-mustard-dark transition shadow-sm whitespace-nowrap">
+        <span>Reservar</span>
+        <span class="hidden sm:inline mx-2 text-charcoal/40">·</span>
+        <span lang="en" class="hidden sm:inline text-xs font-medium text-charcoal/70">Book Now</span>
+      </a>
     </nav>
     <!-- Mobile menu panel -->
     <div id="mobile-menu" class="md:hidden hidden border-t border-cream-deep bg-cream/98 backdrop-blur-md">
@@ -107,8 +106,9 @@
     <!-- Background image + dark overlay for legibility -->
     <div class="absolute inset-0">
       <img src="assets/about-filippo.jpg"
-           alt="Filippo Costa atendiendo el carrito en persona."
-           class="w-full h-full object-cover object-right" />
+           alt="Filippo Costa atendiendo el carrito en persona, poniendo kétchup a un perro caliente."
+           class="w-full h-full object-cover"
+           style="object-position: 78% 68%;" />
       <div class="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-charcoal/65 to-charcoal/85"></div>
     </div>
 
@@ -555,6 +555,7 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
     (function () {
       var toggle = document.getElementById('menu-toggle');
       var menu   = document.getElementById('mobile-menu');
@@ -574,6 +575,36 @@
       menu.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () { setOpen(false); });
       });
+    })();
+
+    // Auto-hide header: hide on scroll down past threshold, reveal on scroll up
+    (function () {
+      var header = document.getElementById('site-header');
+      if (!header) return;
+      var lastY = window.scrollY;
+      var threshold = 100;
+      var ticking = false;
+      function update() {
+        var currentY = window.scrollY;
+        if (currentY < threshold) {
+          header.classList.remove('-translate-y-full');
+        } else {
+          var delta = currentY - lastY;
+          if (delta > 5) {
+            header.classList.add('-translate-y-full');
+          } else if (delta < -5) {
+            header.classList.remove('-translate-y-full');
+          }
+        }
+        lastY = currentY;
+        ticking = false;
+      }
+      window.addEventListener('scroll', function () {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
     })();
   </script>
 
