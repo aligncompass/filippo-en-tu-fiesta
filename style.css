@@ -2,3 +2,43 @@ html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
 .font-serif { font-family: 'Playfair Display', Georgia, serif; }
 ::selection { background: #FFCB1F; color: #1F2A2E; }
+
+/* Scroll-triggered reveal — subtle fade + glide up */
+.reveal,
+.reveal-children > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  will-change: opacity, transform;
+}
+.reveal.is-visible,
+.reveal-children.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-children.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-children.is-visible > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-children.is-visible > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-children.is-visible > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-children.is-visible > *:nth-child(6) { transition-delay: 400ms; }
+
+/* Collapsible history body — smooth grid-rows trick for height animation */
+.collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-out;
+}
+.collapsible > .collapsible-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.collapsible.open { grid-template-rows: 1fr; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-children > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .collapsible { transition: none; }
+}
