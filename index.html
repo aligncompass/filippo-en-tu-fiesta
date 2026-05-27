@@ -52,9 +52,15 @@
 
   <!-- Sticky top navigation (auto-hides on scroll down, reappears on scroll up) -->
   <header id="site-header" class="sticky top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-md border-b border-cream-deep transition-transform duration-300 ease-in-out will-change-transform">
-    <nav class="relative max-w-6xl mx-auto px-5 sm:px-6 py-3 flex items-center justify-between gap-3 sm:gap-4 min-h-[168px] sm:min-h-[184px] md:min-h-[200px]">
+    <nav class="relative max-w-6xl mx-auto px-5 sm:px-6 py-3 flex items-center justify-between gap-3 sm:gap-4 min-h-[200px] sm:min-h-[216px] md:min-h-[232px]">
+      <!-- Center: logo (placed first in DOM so left/right buttons sit on top in stacking order — they win on any visual overlap on narrow screens) -->
+      <a href="#hero" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
+        <img src="assets/logo.png"
+             alt="Filippo en tu Fiesta — el carrito venezolano de perros calientes"
+             class="h-44 sm:h-48 md:h-52 w-auto" />
+      </a>
       <!-- Left: hamburger (mobile) or nav links (desktop) -->
-      <div class="flex items-center pl-1 sm:pl-2">
+      <div class="relative flex items-center pl-3 sm:pl-6">
         <button id="menu-toggle"
                 type="button"
                 class="md:hidden inline-flex items-center justify-center w-14 h-14 rounded-full text-charcoal hover:bg-cream-deep transition"
@@ -76,14 +82,8 @@
           <a href="#inversion" class="hover:text-terracotta transition">Inversión</a>
         </div>
       </div>
-      <!-- Center: logo (absolutely positioned for perfect centering regardless of left/right widths) -->
-      <a href="#hero" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
-        <img src="assets/logo.png"
-             alt="Filippo en tu Fiesta — el carrito venezolano de perros calientes"
-             class="h-36 sm:h-40 md:h-44 w-auto" />
-      </a>
       <!-- Right: Reservar CTA -->
-      <div class="flex items-center">
+      <div class="relative flex items-center">
         <a href="https://wa.me/13057838032?text=Hola%2C%20quiero%20reservar%20Filippo%20para%20mi%20evento."
            class="inline-flex items-center px-3.5 sm:px-5 py-2.5 rounded-full bg-mustard text-charcoal text-sm font-semibold hover:bg-mustard-dark transition shadow-sm whitespace-nowrap">
           <span>Reservar</span>
